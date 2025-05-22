@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: "ProcrastinApp"
+  datasource:
+    url: jdbc:mysql://localhost:3306/procrastinApp?serverTimezone=UTC
+    username: root
+    password: "pass_procrastinApp1234567*$"
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.MySQLDialect
+  logging:
+    level:
+      org:
+        hibernate:
+          SQL:debug
+server:
+  port: 9000
