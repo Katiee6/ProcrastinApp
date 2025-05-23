@@ -1,5 +1,7 @@
 package fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities;
 
+import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.enums.CategorieExcuse;
+import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.enums.StatutExcuse;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;

@@ -1,7 +1,7 @@
 package fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities;
 
+import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.enums.TypeRecompense;
 import jakarta.persistence.*;
-import java.time.LocalTime;
 
 
 @Entity

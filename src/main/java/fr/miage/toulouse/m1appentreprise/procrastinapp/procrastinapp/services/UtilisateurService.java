@@ -5,6 +5,8 @@ import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.Ut
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+
 @Service
 public class UtilisateurService {
     @Autowired
@@ -16,10 +18,12 @@ public class UtilisateurService {
 
     public Utilisateur creerUtilisateur(Utilisateur utilisateur){
 
-        System.out.println(utilisateur);
-
-        //Utilisateur util2 = new Utilisateur("jpp","jean.pierre@mail.com", RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, NiveauProcrastination.DEBUTANT, "Je suis JPP",  0);
+        utilisateur.setDateInscription(LocalTime.now());
 
         return utilisateurRepository.save(utilisateur);
+    }
+
+    public Iterable<Utilisateur> getAllUtilisateur(){
+        return utilisateurRepository.findAll();
     }
 }
