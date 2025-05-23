@@ -10,8 +10,6 @@ import java.util.List;
 
 @Entity
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "utilisateur")
@@ -38,11 +36,11 @@ public class Utilisateur {
     @JsonIgnore
     private List<PiegeProductivite> piegeProductivites;
 
-    public Utilisateur(@NonNull String pseudo,
-                       @NonNull String adresseMail,
-                       @NonNull RoleUtilisateur role,
-                       @NonNull NiveauProcrastination niveauProcrastination,
-                       @NonNull String excusePreferee,
+    public Utilisateur(String pseudo,
+                       String adresseMail,
+                       RoleUtilisateur role,
+                       NiveauProcrastination niveauProcrastination,
+                       String excusePreferee,
                        int pointAccumules) {
         this.pseudo = pseudo;
         this.adresseMail = adresseMail;
@@ -52,5 +50,4 @@ public class Utilisateur {
         this.dateInscription = LocalTime.now();
         this.pointAccumules = pointAccumules;
     }
-
 }

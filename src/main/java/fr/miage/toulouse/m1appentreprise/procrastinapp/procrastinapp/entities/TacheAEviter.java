@@ -1,5 +1,6 @@
 package fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities;
 
+import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.enums.StatutTacheAEviter;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
