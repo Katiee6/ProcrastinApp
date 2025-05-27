@@ -9,8 +9,6 @@ import java.time.LocalTime;
 
 @Entity
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "piege_productivite")
