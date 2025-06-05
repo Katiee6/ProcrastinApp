@@ -1,0 +1,110 @@
+### Utilisateur - Création PROCRASTINATEUR_EN_HERBE
+POST http://localhost:9000/api/utilisateur
+Content-Type: application/json
+
+{ "pseudo": "nextchampion", "adresseMail": "newbie@example.com", "role": "PROCRASTINATEUR_EN_HERBE",
+  "niveauProcrastination": "DEBUTANT", "excusePreferee": "pourquoi faire ?", "pointAccumules": 0 }
+
+### Utilisateur - Création ANTI_PROCRASTINATEUR_REPENTI
+POST http://localhost:9000/api/utilisateur
+Content-Type: application/json
+
+{ "pseudo": "goat", "adresseMail": "thebest@example.com", "role": "ANTI_PROCRASTINATEUR_REPENTI",
+  "niveauProcrastination": "EXPERT", "excusePreferee": "laissez moi tranquille", "pointAccumules": 1000 }
+
+### Utilisateur - Création GESTIONNAIRE_TEMPS_PERDU
+POST http://localhost:9000/api/utilisateur
+Content-Type: application/json
+
+{ "pseudo": "admin", "adresseMail": "gestionnaire@example.com", "role": "GESTIONNAIRE_TEMPS_PERDU",
+  "niveauProcrastination": "EXPERT", "excusePreferee": "je fais ce que je veux", "pointAccumules": 500000 }
+
+
+
+### DefiProcrastination - Création (par GESTIONNAIRE_TEMPS_PERDU)
+POST http://localhost:9000/api/defis
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+{ "titre": "Defi impossible", "description": "Ne fais rien pendant 3 jours", "duree": 3, "difficulte": "DIFFICILE",
+  "pointsAGagner": 70, "dateDebut": "2025-01-01", "dateFin": "2025-07-01" }
+
+
+### DefiProcrastination - Modification (par GESTIONNAIRE_TEMPS_PERDU)
+PUT http://localhost:9000/api/defis
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+{ "id": 1, "titre": "Nouveau titre", "description": "Nouvelle description", "duree": 4, "difficulte": "MOYEN",
+  "pointsAGagner": 50, "dateDebut": "2025-06-01", "dateFin": "2025-07-31" }
+
+
+### DefiProcrastination - Modification statut (par GESTIONNAIRE_TEMPS_PERDU)
+PUT http://localhost:9000/api/defis/statut
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+{ "id": 1, "actif": false }
+
+
+### DefiProcrastination - Suppression (par GESTIONNAIRE_TEMPS_PERDU)
+DELETE http://localhost:9000/api/defis/1
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+
+
+
+### ParticipationDefi - Création (par PROCRASTINATEUR_EN_HERBE)
+POST http://localhost:9000/api/participations-defis
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{ "defi": {"id": 1} }
+
+
+### ParticipationDefi - Fin (par PROCRASTINATEUR_EN_HERBE)
+PUT http://localhost:9000/api/participations-defis
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{ "id": 1, "pointsGagnes": 40 }
+
+
+
+
+### DefiProcrastination - Get all
+GET http://localhost:9000/api/defis
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### DefiProcrastination - Get all actifs
+GET http://localhost:9000/api/defis/actifs
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### DefiProcrastination - Get by id
+GET http://localhost:9000/api/defis/1
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+
+### ParticipationDefi - Get all
+GET http://localhost:9000/api/participations-defis
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+### ParticipationDefi - Get all by utilisateur connecté
+GET http://localhost:9000/api/participations-defis/user
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### ParticipationDefi - Get all by defi
+GET http://localhost:9000/api/participations-defis/defi/1
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+### ParticipationDefi - Get by id
+GET http://localhost:9000/api/participations-defis/1
+Content-Type: application/json
+X-User-Email: newbie@example.com

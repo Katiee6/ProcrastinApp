@@ -2,16 +2,18 @@ package fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities;
 
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.enums.StatutParticipationDefi;
 import jakarta.persistence.*;
+import lombok.Data;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity
+@Data
 public class ParticipationDefi {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalTime dateInscription;
+    private LocalDateTime dateInscription;
     private int pointsGagnes;
 
     @Enumerated(EnumType.STRING)
