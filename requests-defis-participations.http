@@ -63,6 +63,12 @@ X-User-Email: newbie@example.com
 { "defi": {"id": 1} }
 
 
+### ParticipationDefi - Démarrage si date atteinte (par GESTIONNAIRE_TEMPS_PERDU)
+PUT http://localhost:9000/api/participations-defis/commencer
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+
 ### ParticipationDefi - Fin (par PROCRASTINATEUR_EN_HERBE)
 PUT http://localhost:9000/api/participations-defis
 Content-Type: application/json

@@ -6,10 +6,7 @@ import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.en
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.exceptions.ForbiddenOperationException;
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.exceptions.InvalidRequestException;
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.exceptions.ResourceNotFoundException;
-import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.repositories.AttributionRecompenseRepository;
-import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.repositories.ConfrontationPiegeRepository;
-import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.repositories.PiegeProductiviteRepository;
-import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.repositories.RecompenseRepository;
+import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +27,8 @@ public class ConfrontationPiegeService {
     private RecompenseRepository recompenseRepository;
     @Autowired
     private AttributionRecompenseRepository attributionRecompenseRepository;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
 
     /**
      * Récupérer toutes les confrontations aux pièges enregistrées.
@@ -111,14 +110,15 @@ public class ConfrontationPiegeService {
             pointsAAjouter = 50;
         }
 
-        // TODO: AJOUTER LES POINTS DE L'UTILISATEUR A SON TOTAL
+        // Modification des points totaux de l'utilisateur
+        int pointsAvant = utilisateur.getPointAccumules();
+        utilisateur.setPointAccumules(pointsAvant + pointsAAjouter);
+        utilisateurRepository.save(utilisateur);
 
         confrontationPiege.setPiege(piege);
         confrontationPiege.setPoints(pointsAAjouter);
 
         return confrontationPiegeRepository.save(confrontationPiege);
     }
-
-    // TODO: modifierConfrontation ?
 
 }
