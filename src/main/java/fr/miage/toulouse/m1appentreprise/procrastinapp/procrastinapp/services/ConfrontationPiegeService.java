@@ -48,7 +48,7 @@ public class ConfrontationPiegeService {
      */
     public ConfrontationPiege getConfrontationPiegeById(Long id, Utilisateur utilisateur) {
         ConfrontationPiege confrontation = confrontationPiegeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("La confrontation id " + id + "n'existe pas"));
+                .orElseThrow(() -> new ResourceNotFoundException("La confrontation id " + id + " n'existe pas"));
         // Un procrastinateur en herbe ne peut accéder qu'à ses confrontations
         if (utilisateur.getRole() == RoleUtilisateur.PROCRASTINATEUR_EN_HERBE
                 && !utilisateur.equals(confrontation.getUtilisateur())) {
@@ -115,10 +115,22 @@ public class ConfrontationPiegeService {
         utilisateur.setPointAccumules(pointsAvant + pointsAAjouter);
         utilisateurRepository.save(utilisateur);
 
+        confrontationPiege.setUtilisateur(utilisateur);
         confrontationPiege.setPiege(piege);
         confrontationPiege.setPoints(pointsAAjouter);
 
         return confrontationPiegeRepository.save(confrontationPiege);
+    }
+
+    /**
+     * Supprimer une confrontation a un piège.
+     * @param idConfrontationPiege identifiant de la confrontation
+     * @param utilisateur utilisateur effectuant l'action
+     */
+    public void supprimerConfrontationPiege(Long idConfrontationPiege, Utilisateur utilisateur) {
+        // Récupérer la confrontation (vérifie si elle existe et si l'utilisateur peut y accéder)
+        ConfrontationPiege confrontationPiege = getConfrontationPiegeById(idConfrontationPiege, utilisateur);
+        confrontationPiegeRepository.delete(confrontationPiege);
     }
 
 }

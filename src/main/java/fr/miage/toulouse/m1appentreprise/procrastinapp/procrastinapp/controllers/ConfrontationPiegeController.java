@@ -82,6 +82,17 @@ public class ConfrontationPiegeController {
         return confrontationPiegeService.creerConfrontationPiege(confrontationPiege, utilisateur);
     }
 
-    // TODO: modifierConfrontation ?
+    /**
+     * Supprimer une confrontation à un piège.
+     * L'utilisateur doit être lié à cette confrontation.
+     * @param id identifiant de la confrontation à supprimer
+     * @param utilisateur utilisateur connecté
+     */
+    @DeleteMapping("/{idConfrontationPiege}")
+    @AllowedRoles(RoleUtilisateur.PROCRASTINATEUR_EN_HERBE)
+    public void deleteConfrontationPiege(@PathVariable("idConfrontationPiege") long id,
+                                         @CurrentUser Utilisateur utilisateur) {
+        confrontationPiegeService.supprimerConfrontationPiege(id, utilisateur);
+    }
 
 }
