@@ -32,9 +32,9 @@ public class Utilisateur {
     private LocalDateTime dateInscription;
     private int pointAccumules;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<PiegeProductivite> piegeProductivites;
+    //@OneToMany(fetch = FetchType.LAZY)
+    //@JsonIgnore
+    //private List<PiegeProductivite> piegeProductivites;
 
     public Utilisateur(String pseudo,
                        String adresseMail,
