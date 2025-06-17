@@ -3,13 +3,12 @@ package fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities;
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.enums.DifficulteDefiProcrastination;
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
-
+import java.time.LocalDate;
 
 @Entity
 public class DefiProcrastination {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String titre;
@@ -19,7 +18,7 @@ public class DefiProcrastination {
     private DifficulteDefiProcrastination difficulte;
 
     private String contenu;
-    private LocalTime dateDebut;
+    private LocalDate dateDebut;
     private boolean isActif;
 
     @ManyToOne

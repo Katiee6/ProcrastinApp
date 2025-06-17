@@ -5,7 +5,7 @@ import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.Ut
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Service
 public class UtilisateurService {
@@ -18,7 +18,7 @@ public class UtilisateurService {
 
     public Utilisateur creerUtilisateur(Utilisateur utilisateur){
 
-        utilisateur.setDateInscription(LocalTime.now());
+        utilisateur.setDateInscription(LocalDateTime.now());
 
         return utilisateurRepository.save(utilisateur);
     }

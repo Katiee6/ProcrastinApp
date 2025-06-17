@@ -1,15 +1,16 @@
 package fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalTime;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class ConfrontationPiege {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalTime dateConfrontation;
+    private LocalDateTime dateConfrontation;
     private boolean isSuccess;
     private int score;
     private String commentaire;

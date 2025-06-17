@@ -4,23 +4,23 @@ import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.en
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity
 public class TacheAEviter {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String description;
     private int degreGravite;
-    private LocalTime dateLimite;
+    private LocalDate dateLimite;
 
     @Enumerated(EnumType.STRING)
     private StatutTacheAEviter statut;
 
     private int consequenceEchec;
-    private LocalDate dateCreation;
+    private LocalDateTime dateCreation;
 
     @ManyToOne
     private Utilisateur utilisateur;

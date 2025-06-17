@@ -5,7 +5,7 @@ import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.en
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -27,7 +27,7 @@ public class PiegeProductivite {
     private int niveauDifficulte;
     private int recompenseResistance;
     private int consequenceEchec;
-    private LocalTime dateCreation;
+    private LocalDateTime dateCreation;
 
     @ManyToOne
     @JsonBackReference
@@ -39,7 +39,7 @@ public class PiegeProductivite {
                              int niveauDifficulte,
                              int recompenseResistance,
                              int consequenceEchec,
-                             LocalTime dateCreation,
+                             LocalDateTime dateCreation,
                              Utilisateur createur) {
         this.titre = titre;
         this.description = description;
