@@ -14,6 +14,5 @@ public interface TacheAEviterRepository extends CrudRepository<TacheAEviter, Lon
 
     List<TacheAEviter> findByUtilisateur(Utilisateur utilisateur);
 
-
     Optional<TacheAEviter> findById(Long aLong);
 }

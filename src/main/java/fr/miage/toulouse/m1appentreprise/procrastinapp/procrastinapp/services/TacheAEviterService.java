@@ -20,6 +20,10 @@ public class TacheAEviterService {
     @Autowired
     private TacheAEviterRepository tacheAEviterRepository;
 
+    public TacheAEviterService(TacheAEviterRepository tacheAEviterRepository) {
+        this.tacheAEviterRepository = tacheAEviterRepository;
+    }
+
     /** Récupérer toutes les tâches à éviter d'un utilisateur
      * @param utilisateur l'utilisateur dont on veut récupérer les tâches
      * @return la liste des tâches à éviter de l'utilisateur

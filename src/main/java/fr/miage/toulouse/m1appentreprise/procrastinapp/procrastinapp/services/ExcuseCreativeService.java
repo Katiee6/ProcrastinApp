@@ -28,6 +28,12 @@ public class ExcuseCreativeService {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
 
+    public ExcuseCreativeService(ExcuseCreativeRepository excuseCreativeRepository, TacheAEviterService tacheAEviterService, UtilisateurRepository utilisateurRepository) {
+        this.excuseCreativeRepository = excuseCreativeRepository;
+        this.tacheAEviterService = tacheAEviterService;
+        this.utilisateurRepository = utilisateurRepository;
+    }
+
     /**
      * Récupérer toutes les excuses créatives.
      * @return la liste de toutes les excuses créatives
