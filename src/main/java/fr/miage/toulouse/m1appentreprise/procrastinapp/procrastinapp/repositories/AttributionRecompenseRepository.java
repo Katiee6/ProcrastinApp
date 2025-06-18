@@ -4,6 +4,10 @@ import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.At
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.Utilisateur;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 public interface AttributionRecompenseRepository extends CrudRepository<AttributionRecompense, Long> {
     boolean existsByUtilisateur(Utilisateur utilisateur);
+
+    List<AttributionRecompense> findAttributionRecompenseByContexteAttribution(String contexteAttribution);
 }

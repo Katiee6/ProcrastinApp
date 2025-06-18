@@ -30,6 +30,14 @@ public class ConfrontationPiegeService {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
 
+    public ConfrontationPiegeService(ConfrontationPiegeRepository confrontationPiegeRepository, PiegeProductiviteRepository piegeProductiviteRepository, RecompenseRepository recompenseRepository, AttributionRecompenseRepository attributionRecompenseRepository, UtilisateurRepository utilisateurRepository) {
+        this.confrontationPiegeRepository = confrontationPiegeRepository;
+        this.piegeProductiviteRepository = piegeProductiviteRepository;
+        this.recompenseRepository = recompenseRepository;
+        this.attributionRecompenseRepository = attributionRecompenseRepository;
+        this.utilisateurRepository = utilisateurRepository;
+    }
+
     /**
      * Récupérer toutes les confrontations aux pièges enregistrées.
      * @return la liste complète des confrontations
@@ -130,7 +138,27 @@ public class ConfrontationPiegeService {
     public void supprimerConfrontationPiege(Long idConfrontationPiege, Utilisateur utilisateur) {
         // Récupérer la confrontation (vérifie si elle existe et si l'utilisateur peut y accéder)
         ConfrontationPiege confrontationPiege = getConfrontationPiegeById(idConfrontationPiege, utilisateur);
+        Long piegeId = confrontationPiege.getPiege().getId();
         confrontationPiegeRepository.delete(confrontationPiege);
+        int pointsAAjouter;
+        if (confrontationPiege.isSucces()) {
+            // on enlève les points ajoutés précédemment
+            pointsAAjouter = -50;
+        } else {
+            // on ajoute les points enlevés précédemment
+            pointsAAjouter = 50;
+            // on retire le badge précédemment attribué
+            List<AttributionRecompense> attributionRecompense = attributionRecompenseRepository
+                    .findAttributionRecompenseByContexteAttribution("Echec confrontation piège " + piegeId);
+            if (attributionRecompense.isEmpty()) {
+                throw new ResourceNotFoundException("L'attribution de récompense n'a pas été trouvée");
+            }
+            AttributionRecompense attribution = attributionRecompense.get(0);
+            attributionRecompenseRepository.delete(attribution);
+        }
+        int pointsAvant = utilisateur.getPointAccumules();
+        utilisateur.setPointAccumules(pointsAvant + pointsAAjouter);
+        utilisateurRepository.save(utilisateur);
     }
 
 }
