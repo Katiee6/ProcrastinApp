@@ -20,7 +20,7 @@ public class UtilisateurController {
     private UtilisateurService utilisateurService;
 
     /**
-     * Créer un nouvel utilisateur.
+     * Créer un nouvel utilisateur: ProcrastinateurEnHerbe.
      * JSON attendu : { "pseudo": "...", "adresseMail": "...", ... }
      * @param utilisateur données du nouvel utilisateur
      * @return utilisateur créé
@@ -32,7 +32,7 @@ public class UtilisateurController {
     }
 
     /**
-     * Créer un nouvel utilisateur.
+     * Créer un nouvel utilisateur: Anti_procrastinateurRepentis.
      * JSON attendu : { "pseudo": "...", "adresseMail": "...", ... }
      * @param utilisateur données du nouvel utilisateur
      * @return utilisateur créé
