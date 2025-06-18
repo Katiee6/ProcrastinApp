@@ -479,5 +479,93 @@ Content-Type: application/json
 X-User-Email: newbie@example.com
 
 #
+# Recompense
+#
+### Recompense - Création 1
+POST http://localhost:9000/api/recompense
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+{
+  "titre": "Productivité maximale",
+  "description": "Atteindre 5h de concentration sans interruption",
+  "conditionsObtention": "5h sans distraction",
+  "niveauPrestige": 5,
+  "type": "TITRE_HONORIFIQUE"
+}
+
+### Recompense - Création 2
+POST http://localhost:9000/api/recompense
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+{
+  "titre": "Semaine sans procrastination",
+  "description": "Avoir 5 jours consécutifs de travail efficace",
+  "conditionsObtention": "5 jours consécutifs de productivité",
+  "niveauPrestige": 10,
+  "type": "BADGE"
+}
+
+### Recompense - Création avec erreur  400 (titre vide)
+POST http://localhost:9000/api/recompense
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+{
+  "titre": "",
+  "description": "Description valide",
+  "conditionsObtention": "Condition valide",
+  "niveauPrestige": 3,
+  "type": "BADGE"
+}
+
+### Recompense - Récupération de toutes les récompenses
+GET http://localhost:9000/api/recompense
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### Recompense - Récupération par ID
+GET http://localhost:9000/api/recompense/1
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### Recompense - Modification d'une récompense
+PUT http://localhost:9000/api/recompense/1
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+{
+  "titre": "Objectif révisé",
+  "description": "Modification des critères de la récompense",
+  "conditionsObtention": "Nouveaux critères",
+  "niveauPrestige": 7,
+  "type": "POUVOIR_SPECIAL"
+}
+
+### Recompense - Modification d'une récompense inexistante (erreur 404)
+PUT http://localhost:9000/api/recompense/999
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+{
+  "titre": "Récompense inexistante",
+  "description": "Tentative de modification",
+  "conditionsObtention": "Aucune",
+  "niveauPrestige": 4,
+  "type": "BADGE"
+}
+
+### Recompense - Suppression non autorisée (erreur 403)
+DELETE http://localhost:9000/api/recompense/1
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+### Recompense - Suppression autorisée
+DELETE http://localhost:9000/api/recompense/1
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+#
 # Autre
 #

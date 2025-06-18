@@ -31,7 +31,7 @@ public class TacheAEviterController {
      * @return la tâche trouvée
      */
     @GetMapping("/{id}")
-    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
+    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
     public ResponseEntity<TacheAEviter> getTacheById(@PathVariable Long id) {
         return ResponseEntity.ok(tacheAEviterService.getTacheById(id));
     }

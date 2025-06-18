@@ -2,6 +2,7 @@ package fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.services;
 
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.*;
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.enums.RoleUtilisateur;
+import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.enums.StatutAttributionRecompense;
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.enums.TypeRecompense;
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.exceptions.ForbiddenOperationException;
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.exceptions.InvalidRequestException;
@@ -110,8 +111,17 @@ public class ConfrontationPiegeService {
                 throw new ResourceNotFoundException("La récompense \"Procrastinateur en danger\" n'a pas été trouvée");
             }
             Recompense recompenseAAttribuer = recompense.get(0);
-            AttributionRecompense attributionRecompense = new AttributionRecompense(LocalDateTime.now(), LocalDateTime.now().plusDays(7),
-                    "Echec confrontation piège " + piegeId, true, utilisateur, recompenseAAttribuer);
+
+            // Création de l'attribution de récompense
+            AttributionRecompense attributionRecompense = new AttributionRecompense();
+            attributionRecompense.setDateObtention(LocalDateTime.now());
+            attributionRecompense.setDateExpiration(LocalDateTime.now().plusDays(7));
+            attributionRecompense.setContexteAttribution("Echec confrontation piège " + piegeId);
+            attributionRecompense.setStatut(StatutAttributionRecompense.ACTIF);
+            attributionRecompense.setUtilisateur(utilisateur);
+            attributionRecompense.setRecompense(recompenseAAttribuer);
+
+            // Enregistrement de l'attribution de récompense
             attributionRecompenseRepository.save(attributionRecompense);
             pointsAAjouter = -50;
         } else {
