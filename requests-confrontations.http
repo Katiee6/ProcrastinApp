@@ -1,0 +1,54 @@
+# Avant :
+#     1. Créer les utilisateurs :
+# - PROCRASTINATEUR_EN_HERBE : newbie@example.com
+# - ANTI_PROCRASTINATEUR_REPENTI : thebest@example.com
+#     2. Créer 1 piège de productivité, par exemple :
+# insert into piege_productivite (id, consequence_echec, date_creation, niveau_difficulte, recompense_resistance, createur_id, description, titre, type)
+# values (1, 2, now(), 3, 40, 2, 'complique', 'hard', 'JEU');
+#     3. Créer le badge 'Procrastinateur en danger' obtenu en cas d'échec face a un piege, par exemple :
+# insert into recompense (condition_obtention, niveau_prestige, id, description, titre, type)
+# values (3, 5, 1, 'Badge Procrastinateur en danger en cas de non reussite face a un piege', 'Procrastinateur en danger', 'BADGE')
+
+
+### ConfrontationPiege - Création SUCCES (par PROCRASTINATEUR_EN_HERBE)
+POST http://localhost:9000/api/confrontation-pieges
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{ "piege": { "id": 1 }, "dateConfrontation": "2025-06-16", "succes": true, "commentaire": "c'est bien" }
+
+
+### ConfrontationPiege - Création ECHEC (par PROCRASTINATEUR_EN_HERBE)
+POST http://localhost:9000/api/confrontation-pieges
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{ "piege": { "id": 1 }, "dateConfrontation": "2025-06-16", "succes": false, "commentaire": "c'est bien" }
+
+
+### ConfrontationPiege - Suppression (par PROCRASTINATEUR_EN_HERBE)
+DELETE http://localhost:9000/api/confrontation-pieges/1
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+
+
+### ConfrontationPiege - Get all (par ANTI_PROCRASTINATEUR_REPENTI)
+GET http://localhost:9000/api/confrontation-pieges
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+### ConfrontationPiege - Get by id (par PROCRASTINATEUR_EN_HERBE)
+GET http://localhost:9000/api/confrontation-pieges/1
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### ConfrontationPiege - Get by piege id (par ANTI_PROCRASTINATEUR_REPENTI)
+GET http://localhost:9000/api/confrontation-pieges/piege/1
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+### ConfrontationPiege - Get all for connected user (par PROCRASTINATEUR_EN_HERBE)
+GET http://localhost:9000/api/confrontation-pieges/user
+Content-Type: application/json
+X-User-Email: newbie@example.com

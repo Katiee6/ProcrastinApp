@@ -11,6 +11,7 @@ import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.exceptions.
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.exceptions.ResourceNotFoundException;
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.repositories.DefiProcrastinationRepository;
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.repositories.ParticipationDefiRepository;
+import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,8 @@ public class ParticipationDefiService {
     private ParticipationDefiRepository participationDefiRepository;
     @Autowired
     private DefiProcrastinationRepository defiProcrastinationRepository;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
 
     /**
      * Récupérer la liste de toutes les participations aux défis.
@@ -132,11 +135,11 @@ public class ParticipationDefiService {
      * Passe le statut de INSCRIT à EN_COURS si la date de début du défi est aujourd'hui ou déjà passée.
      */
     public void commencerLesParticipationsDefis() {
-        participationDefiRepository.findParticipationDefiByStatut(StatutParticipationDefi.INSCRIT)
+        participationDefiRepository.findParticipationDefiByStatutAndDefi_DateDebutLessThanEqual(
+                StatutParticipationDefi.INSCRIT, LocalDate.now())
                 .forEach(participationDefi -> {
-                    if (!LocalDate.now().isBefore(participationDefi.getDefi().getDateDebut())) {
-                        participationDefi.setStatut(StatutParticipationDefi.EN_COURS);
-                    }
+                    participationDefi.setStatut(StatutParticipationDefi.EN_COURS);
+                    participationDefiRepository.save(participationDefi);
                 });
     }
 
@@ -164,12 +167,22 @@ public class ParticipationDefiService {
                 && !utilisateur.equals(participation.getUtilisateur())) {
             throw new ForbiddenOperationException("Interdit");
         }
+        // On ne peut terminer une participation qu'une seule fois
+        if (participation.getStatut().equals(StatutParticipationDefi.TERMINE)) {
+            throw new ConflictException("La participation id " + id + " est déja terminée");
+        }
         // Attribution des points : ceux renseignés ou le max possible
         int points = participationDefi.getPointsGagnes(); // points renseignés json
         int pointsMax = participation.getDefi().getPointsAGagner(); // points possibles pour ce défi
-        participation.setPointsGagnes(Math.min(points, pointsMax)); // points renseignés ou max
-        // TODO: ajouter ces points à ceux de l'utilisateur
+        int pointsGagnes = Math.min(points, pointsMax); // points renseignés ou max
+        participation.setPointsGagnes(pointsGagnes);
         participation.setStatut(StatutParticipationDefi.TERMINE); // participation terminée
+
+        // Modification des points totaux de l'utilisateur
+        int pointsAvant = utilisateur.getPointAccumules();
+        utilisateur.setPointAccumules(pointsAvant + pointsGagnes);
+        utilisateurRepository.save(utilisateur);
+
         return participationDefiRepository.save(participation);
     }
 

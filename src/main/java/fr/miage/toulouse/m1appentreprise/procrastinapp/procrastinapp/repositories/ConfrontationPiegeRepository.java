@@ -5,7 +5,14 @@ import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.Pi
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.Utilisateur;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 public interface ConfrontationPiegeRepository extends CrudRepository<ConfrontationPiege, Long> {
+
+    List<ConfrontationPiege> findConfrontationPiegesByPiege_Id(Long piegeId);
+
+    List<ConfrontationPiege> findConfrontationPiegesByUtilisateur(Utilisateur utilisateur);
+
     boolean existsByUtilisateur(Utilisateur utilisateur);
     
     int countConfrontationPiegeByPiege(PiegeProductivite piege);
