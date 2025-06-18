@@ -35,7 +35,7 @@ public class PiegeProductiviteService {
      * @return la liste des pièges créés par cet utilisateur
      */
     public Iterable<PiegeProductivite> getAllPiegeProductiviteUtilisateur(Utilisateur utilisateur) {
-        return piegeProductiviteRepository.findPiegeProductiviteByCreateur(utilisateur);
+        return piegeProductiviteRepository.findAllByCreateur(utilisateur);
     }
 
     /**

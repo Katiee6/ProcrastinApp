@@ -1,25 +1,117 @@
+#
+# Utilisateur
+#
+
 ### Utilisateur - Création PROCRASTINATEUR_EN_HERBE
-POST http://localhost:9000/api/utilisateur
+POST http://localhost:9000/api/utilisateurs
 Content-Type: application/json
 
 { "pseudo": "nextchampion", "adresseMail": "newbie@example.com", "role": "PROCRASTINATEUR_EN_HERBE",
   "niveauProcrastination": "DEBUTANT", "excusePreferee": "pourquoi faire ?", "pointAccumules": 0 }
 
-### Utilisateur - Création ANTI_PROCRASTINATEUR_REPENTI
-POST http://localhost:9000/api/utilisateur
+### Utilisateur - Création ANTI_PROCRASTINATEUR_REPENTIS (par GESTIONNAIRE_TEMPS_PERDU)
+POST http://localhost:9000/api/utilisateurs/Anti_procrastinateurRepentis
 Content-Type: application/json
+X-User-Email: gestionnaire@example.com
 
-{ "pseudo": "goat", "adresseMail": "thebest@example.com", "role": "ANTI_PROCRASTINATEUR_REPENTI",
+{ "pseudo": "goat", "adresseMail": "thebest@example.com", "role": "ANTI_PROCRASTINATEUR_REPENTIS",
   "niveauProcrastination": "EXPERT", "excusePreferee": "laissez moi tranquille", "pointAccumules": 1000 }
 
-### Utilisateur - Création GESTIONNAIRE_TEMPS_PERDU
-POST http://localhost:9000/api/utilisateur
+### Utilisateur - Get all (par GESTIONNAIRE_TEMPS_PERDU)
+GET http://localhost:9000/api/utilisateurs
 Content-Type: application/json
+X-User-Email: gestionnaire@example.com
 
-{ "pseudo": "admin", "adresseMail": "gestionnaire@example.com", "role": "GESTIONNAIRE_TEMPS_PERDU",
-  "niveauProcrastination": "EXPERT", "excusePreferee": "je fais ce que je veux", "pointAccumules": 500000 }
+### Utilisateur - Get by Id (par GESTIONNAIRE_TEMPS_PERDU)
+GET http://localhost:9000/api/utilisateurs/1
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+### Utilisateur - Modification (par GESTIONNAIRE_TEMPS_PERDU)
+PUT http://localhost:9000/api/utilisateurs/3
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+{
+  "pseudo": "goat",
+  "adresseMail": "thebest@example.com",
+  "niveauProcrastination": "EXPERT",
+  "excusePreferee": "j'ai changé !",
+  "pointAccumules": 1200
+}
 
 
+### Utilisateur - Supression (par GESTIONNAIRE_TEMPS_PERDU)
+DELETE http://localhost:9000/api/utilisateurs/2
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+#
+# Connexion
+#
+
+### Connexion - Connexion
+POST http://localhost:9000/api/connexion
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+
+#
+# PiegeProductivite
+#
+
+### PiegeProductivite - Créer un piège de productivité (par ANTI_PROCRASTINATEUR_REPENTIS)
+POST http://localhost:9000/api/pieges-productivite
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+{
+  "titre": "Défilement infini sur TikTok",
+  "description": "Tu ouvres l’appli, et soudain 2 heures ont passé.",
+  "type": "JEU",
+  "niveauDifficulte": 4,
+  "recompenseResistance": 50,
+  "consequenceEchec": -30
+}
+
+### PiegeProductivite - Récupérer des pièges (par ANTI_PROCRASTINATEUR_REPENTIS)
+GET http://localhost:9000/api/pieges-productivite
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+### PiegeProductivite - Récupérer des pièges par Utilisateur (par ANTI_PROCRASTINATEUR_REPENTIS)
+GET http://localhost:9000/api/pieges-productivite/user
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+### PiegeProductivite - Récupérer un piège par ID (par ANTI_PROCRASTINATEUR_REPENTIS)
+GET http://localhost:9000/api/pieges-productivite/2
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+
+### PiegeProductivite - Modifier un piège existant (par ANTI_PROCRASTINATEUR_REPENTIS)
+PUT http://localhost:9000/api/pieges-productivite/1
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+{
+  "titre": "Scroll de nuit sur Instagram",
+  "description": "Il est 1h du matin et tu regardes encore des chats.",
+  "type": "JEU",
+  "niveauDifficulte": 5,
+  "recompenseResistance": 70,
+  "consequenceEchec": -40
+}
+
+### PiegeProductivite - Suppression d'un piège par ID (par ANTI_PROCRASTINATEUR_REPENTIS)
+DELETE http://localhost:9000/api/pieges-productivite/2
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+#
+# DefiProcrastination
+#
 
 ### DefiProcrastination - Création (par GESTIONNAIRE_TEMPS_PERDU)
 POST http://localhost:9000/api/defis
@@ -31,7 +123,7 @@ X-User-Email: gestionnaire@example.com
 
 
 ### DefiProcrastination - Modification (par GESTIONNAIRE_TEMPS_PERDU)
-PUT http://localhost:9000/api/defis
+PUT http://localhost:9000/api/defis/1
 Content-Type: application/json
 X-User-Email: gestionnaire@example.com
 
@@ -53,7 +145,9 @@ Content-Type: application/json
 X-User-Email: gestionnaire@example.com
 
 
-
+#
+# ParticipationDefi
+#
 
 ### ParticipationDefi - Création (par PROCRASTINATEUR_EN_HERBE)
 POST http://localhost:9000/api/participations-defis

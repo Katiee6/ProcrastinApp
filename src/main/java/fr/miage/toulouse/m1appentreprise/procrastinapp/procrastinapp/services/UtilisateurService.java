@@ -100,12 +100,28 @@ public class UtilisateurService {
      * Modifier les informations d’un utilisateur existant.
      * @param id identifiant de l'utilisateur à modifier
      * @param utilisateurModifie les nouvelles informations à enregistrer
+     * @param utilisateurConnecte utilisateur connecté actuellement
      * @return l'utilisateur mis à jour
      * @throws ConflictException si un autre utilisateur possède déjà ces informations
      */
-    public Utilisateur modifierUtilisateur(Long id, Utilisateur utilisateurModifie) {
-        getUtilisateurById(id); // Vérifie qu’il existe
-        utilisateurModifie.setId(id);
+    public Utilisateur modifierUtilisateur(Long id, Utilisateur utilisateurModifie, Utilisateur utilisateurConnecte) {
+        Utilisateur utilisateurCible = getUtilisateurById(id); // Existence vérifiée
+
+        // Règle 1 : PROCRASTINATEUR_EN_HERBE peut modifier uniquement lui-même
+        if (utilisateurConnecte.getRole().equals(RoleUtilisateur.PROCRASTINATEUR_EN_HERBE)
+                && !utilisateurConnecte.getId().equals(utilisateurCible.getId())) {
+            throw new ForbiddenOperationException("Vous ne pouvez modifier que votre propre compte.");
+        }
+
+        // Règle 2 : ANTI_PROCRASTINATEUR_REPENTI ne peut pas modifier un GESTIONNAIRE_TEMPS_PERDU
+        if (utilisateurConnecte.getRole().equals(RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS)
+                && utilisateurCible.getRole().equals(RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU)) {
+            throw new ForbiddenOperationException("Vous ne pouvez pas modifier un administrateur.");
+        }
+
+        utilisateurModifie.setId(id); // S'assure qu'on met bien à jour le bon utilisateur
+        utilisateurModifie.setRole(utilisateurCible.getRole()); // S'assure qu'on conserve le bon Role utilisateur
+        utilisateurModifie.setDateInscription(utilisateurCible.getDateInscription()); // S'assure qu'on conserve la date d'inscription
 
         if (existeDejaPourModification(utilisateurModifie)) {
             throw new ConflictException("Un autre utilisateur avec les mêmes informations existe déjà.");
@@ -113,6 +129,7 @@ public class UtilisateurService {
 
         return utilisateurRepository.save(utilisateurModifie);
     }
+
 
     /**
      * Supprimer un utilisateur de la plateforme.

@@ -12,8 +12,8 @@ public class InitialDataLoader {
     CommandLineRunner initDatabase(UtilisateurRepository utilisateurRepository) {
         return args -> {
             // Vérifie si l'utilisateur admin existe déjà
-            if (!utilisateurRepository.existsByAdresseMail("Gestionnaire_du_temps_perdu@example.com")) {
-                Utilisateur admin = new Utilisateur("Admin", "Gestionnaire_du_temps_perdu@example.com", RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU);
+            if (!utilisateurRepository.existsByAdresseMail("gestionnaire@example.com")) {
+                Utilisateur admin = new Utilisateur("Admin", "gestionnaire@example.com", RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU);
                 utilisateurRepository.save(admin);
             }
         };

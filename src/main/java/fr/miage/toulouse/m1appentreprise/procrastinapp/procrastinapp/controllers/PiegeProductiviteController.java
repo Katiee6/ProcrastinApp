@@ -46,7 +46,7 @@ public class PiegeProductiviteController {
      * @return piège correspondant
      */
     @GetMapping("/{id}")
-    public PiegeProductivite getPiegeProductivite(@PathVariable Long id) {
+    public PiegeProductivite getPiegeProductivite(@PathVariable("id") Long id) {
         return piegeProductiviteService.getPiegeProductiviteById(id);
     }
 
@@ -73,7 +73,7 @@ public class PiegeProductiviteController {
      */
     @PutMapping("/{id}")
     @AllowedRoles(RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS)
-    public PiegeProductivite updatePiegeProductivite(@PathVariable Long id,
+    public PiegeProductivite updatePiegeProductivite(@PathVariable("id") Long id,
                                                      @RequestBody PiegeProductivite piegeModifie) {
         return piegeProductiviteService.modifierPiegeProductivite(id, piegeModifie);
     }
@@ -85,7 +85,7 @@ public class PiegeProductiviteController {
      */
     @DeleteMapping("/{id}")
     @AllowedRoles(RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS)
-    public ResponseEntity<Void> deletePiegeProductivite(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePiegeProductivite(@PathVariable("id") Long id) {
         piegeProductiviteService.supprimerPiegeProductivite(id);
         return ResponseEntity.noContent().build();
     }

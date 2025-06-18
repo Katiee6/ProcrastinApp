@@ -46,14 +46,12 @@ public class UtilisateurController {
 
     /**
      * Récupérer tous les utilisateurs.
-     * Autorisé uniquement pour les PROCRASTINATEUR_EN_HERBE (exemple de restriction).
-     * @param utilisateur utilisateur connecté
+     * Autorisé uniquement pour les ANTI_PROCRASTINATEUR_REPENTIS & GESTIONNAIRE_TEMPS_PERDU.
      * @return liste des utilisateurs
      */
     @GetMapping
-    @AllowedRoles(RoleUtilisateur.PROCRASTINATEUR_EN_HERBE)
-    public Iterable<Utilisateur> getAllUtilisateurs(@CurrentUser Utilisateur utilisateur) {
-        System.out.println("Utilisateur connecté : " + utilisateur.getPseudo());
+    @AllowedRoles({RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
+    public Iterable<Utilisateur> getAllUtilisateurs() {
         return utilisateurService.getAllUtilisateur();
     }
 
@@ -63,7 +61,7 @@ public class UtilisateurController {
      * @return utilisateur correspondant
      */
     @GetMapping("/{id}")
-    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
+    @AllowedRoles({RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
     public Utilisateur getUtilisateurById(@PathVariable("id") Long id) {
         return utilisateurService.getUtilisateurById(id);
     }
@@ -76,10 +74,11 @@ public class UtilisateurController {
      * @return utilisateur modifié
      */
     @PutMapping("/{id}")
-    @AllowedRoles(RoleUtilisateur.PROCRASTINATEUR_EN_HERBE)
+    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
     public Utilisateur updateUtilisateur(@PathVariable("id") Long id,
-                                         @RequestBody Utilisateur utilisateurModifie) {
-        return utilisateurService.modifierUtilisateur(id, utilisateurModifie);
+                                         @RequestBody Utilisateur utilisateurModifie,
+                                         @CurrentUser Utilisateur currentUtilisateur) {
+        return utilisateurService.modifierUtilisateur(id, utilisateurModifie, currentUtilisateur);
     }
 
     /**

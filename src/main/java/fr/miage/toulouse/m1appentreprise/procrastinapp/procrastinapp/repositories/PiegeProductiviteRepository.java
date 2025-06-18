@@ -6,10 +6,9 @@ import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.Ut
 import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.enums.TypePiege;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
 public interface PiegeProductiviteRepository extends CrudRepository<PiegeProductivite, Long> {
-    List<PiegeProductivite> findPiegeProductiviteByCreateur(Utilisateur createur);
+
+    Iterable<PiegeProductivite> findAllByCreateur(Utilisateur createur);
 
     boolean existsByCreateur(Utilisateur createur);
     boolean existsPiegeProductiviteByTitreAndDescriptionAndTypeAndNiveauDifficulteAndRecompenseResistanceAndConsequenceEchecAndCreateur(
