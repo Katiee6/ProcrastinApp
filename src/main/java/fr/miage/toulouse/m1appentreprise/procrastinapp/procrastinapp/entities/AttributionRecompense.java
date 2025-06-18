@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -17,6 +18,7 @@ public class AttributionRecompense {
 
     private LocalDateTime dateObtention;
     private LocalDateTime dateExpiration;
+
     private String contexteAttribution;
     private boolean actif;
 

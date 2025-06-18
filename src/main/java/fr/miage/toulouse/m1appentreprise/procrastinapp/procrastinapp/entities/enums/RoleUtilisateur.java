@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum RoleUtilisateur {
     PROCRASTINATEUR_EN_HERBE("Procrastinateur_en_herbe"),
-    ANTI_PROCRASTINATEUR_REPENTI("Anti_procrastinateur_repenti"),
+    ANTI_PROCRASTINATEUR_REPENTIS("Anti_procrastinateur_repentis"),
     GESTIONNAIRE_TEMPS_PERDU("Gestionnaire_du_temps_perdu");
 
     private final String label;

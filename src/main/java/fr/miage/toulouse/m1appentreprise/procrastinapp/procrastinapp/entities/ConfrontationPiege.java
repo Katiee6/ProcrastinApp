@@ -15,6 +15,7 @@ public class ConfrontationPiege {
     private LocalDate dateConfrontation;
     private boolean succes;
     private int points;
+
     private String commentaire;
 
     @ManyToOne
