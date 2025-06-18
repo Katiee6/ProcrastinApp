@@ -1,16 +1,16 @@
 package fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalTime;
 
+import java.time.LocalDate;
 
 @Entity
 public class AttributionRecompense {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalTime dateObtention;
+    private LocalDate dateObtention;
     private String contexteAttribution;
     private boolean isActif;
 

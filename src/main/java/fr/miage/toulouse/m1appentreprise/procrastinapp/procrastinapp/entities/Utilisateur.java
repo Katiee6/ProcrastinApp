@@ -5,7 +5,7 @@ import fr.miage.toulouse.m1appentreprise.procrastinapp.procrastinapp.entities.en
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -29,7 +29,7 @@ public class Utilisateur {
     private NiveauProcrastination niveauProcrastination;
 
     private String excusePreferee;
-    private LocalTime dateInscription;
+    private LocalDateTime dateInscription;
     private int pointAccumules;
 
     //@OneToMany(fetch = FetchType.LAZY)
@@ -47,7 +47,19 @@ public class Utilisateur {
         this.role = role;
         this.niveauProcrastination = niveauProcrastination;
         this.excusePreferee = excusePreferee;
-        this.dateInscription = LocalTime.now();
+        this.dateInscription = LocalDateTime.now();
         this.pointAccumules = pointAccumules;
+    }
+
+    public Utilisateur(String pseudo,
+                       String adresseMail,
+                       RoleUtilisateur role) {
+        this.pseudo = pseudo;
+        this.adresseMail = adresseMail;
+        this.role = role;
+        this.niveauProcrastination = NiveauProcrastination.DEBUTANT;
+        this.excusePreferee = "";
+        this.dateInscription = LocalDateTime.now();
+        this.pointAccumules = 0;
     }
 }

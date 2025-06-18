@@ -6,7 +6,9 @@ import lombok.NonNull;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UtilisateurRepository extends CrudRepository<Utilisateur, Long> {
-    boolean existsByAdresseMail(@NonNull String adresseMail);
     Utilisateur findUtilisateurByAdresseMail(@NonNull String adresseMail);
-    Utilisateur findUtilisateurById(Long id);
+
+    boolean existsByAdresseMail(@NonNull String adresseMail);
+    boolean existsByPseudoAndAdresseMail(String pseudo, String adresseMail);
+    boolean existsByPseudoAndAdresseMailAndIdIsNot(String pseudo, String adresseMail, Long id);
 }
