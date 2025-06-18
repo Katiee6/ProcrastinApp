@@ -23,6 +23,11 @@ public class DefiProcrastinationService {
     @Autowired
     private ParticipationDefiRepository participationDefiRepository;
 
+    public DefiProcrastinationService(DefiProcrastinationRepository defiProcrastinationRepository, ParticipationDefiRepository participationDefiRepository) {
+        this.defiProcrastinationRepository = defiProcrastinationRepository;
+        this.participationDefiRepository = participationDefiRepository;
+    }
+
     /**
      * Récupérer tous les défis de procrastination.
      * @return la liste de tous les défis

@@ -31,6 +31,13 @@ public class ParticipationDefiService {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
 
+    public ParticipationDefiService(ParticipationDefiRepository participationDefiRepository, DefiProcrastinationRepository defiProcrastinationRepository, UtilisateurRepository utilisateurRepository) {
+        this.participationDefiRepository = participationDefiRepository;
+        this.defiProcrastinationRepository = defiProcrastinationRepository;
+        this.utilisateurRepository = utilisateurRepository;
+    }
+
+
     /**
      * Récupérer la liste de toutes les participations aux défis.
      * @return toutes les participations existantes
