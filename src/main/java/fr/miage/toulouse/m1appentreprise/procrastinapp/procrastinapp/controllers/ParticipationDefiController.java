@@ -82,6 +82,15 @@ public class ParticipationDefiController {
     }
 
     /**
+     * Commencer les participations aux défis dont la date de début est atteinte.
+     */
+    @PutMapping("/commencer")
+    @AllowedRoles(RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU)
+    public void startParticipationsDefis() {
+        participationDefiService.commencerLesParticipationsDefis();
+    }
+
+    /**
      * Terminer une participation (mettre à jour avec points gagnés).
      * JSON attendu : { "id": entier, "pointsGagnes": entier }
      * @param participationDefi données mises à jour (id de la participation et points gagnés)
