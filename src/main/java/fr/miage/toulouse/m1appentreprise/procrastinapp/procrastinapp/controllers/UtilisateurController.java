@@ -26,7 +26,7 @@ public class UtilisateurController {
      * @return utilisateur créé
      */
     @PostMapping
-    public ResponseEntity<Utilisateur> createUtilisateur(@RequestBody Utilisateur utilisateur) {
+    public ResponseEntity<Utilisateur> createUtilisateurProcrastinateurEnHerbe(@RequestBody Utilisateur utilisateur) {
         Utilisateur util = utilisateurService.creerUtilisateurProcrastinateurEnHerbe(utilisateur);
         return new ResponseEntity<>(util, HttpStatus.CREATED);
     }
