@@ -202,3 +202,230 @@ X-User-Email: gestionnaire@example.com
 GET http://localhost:9000/api/participations-defis/1
 Content-Type: application/json
 X-User-Email: newbie@example.com
+
+### ExcuseCreative - Création (par PROCRASTINATEUR_EN_HERBE)
+POST http://localhost:9000/api/excuse-creative
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{
+  "texteExcuse": "Je dois faire une pause pour regarder des vidéos de chiens",
+  "situationApp": "le matin avant de commencer le travail",
+  "votesRecus": 0,
+  "dateSoumission": "2025-06-12T10:00:00",
+  "categorie": "TRAVAIL",
+  "statut": "EN_ATTENTE"
+}
+
+### ExcuseCreative - Création (par PROCRASTINATEUR_EN_HERBE)
+POST http://localhost:9000/api/excuse-creative
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{
+  "texteExcuse": "Faire un karaoké pour me détendre",
+  "situationApp": "Pendant la pause déjeuner",
+  "categorie": "ETUDES",
+  "statut": "EN_ATTENTE",
+  "votesRecus": 0,
+  "dateSoumission": "2025-06-01T10:00:00"
+}
+
+### ExcuseCreative - Création erreur 400 (données manquantes)
+POST http://localhost:9000/api/excuse-creative
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{
+"texteExcuse": "",
+"categorie": "ETUDES"
+}
+
+### ExcuseCreative - Get all
+GET http://localhost:9000/api/excuse-creative
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### ExcuseCreative - Get by id
+GET http://localhost:9000/api/excuse-creative/1
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+
+
+### ExcuseCreative - Modification (par PROCRASTINATEUR_REPENTI)
+PUT http://localhost:9000/api/excuse-creative/1
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+{
+  "id": 1,
+  "texteExcuse": "Je dois faire du yoga pour me détendre",
+  "situationApp": "AVANT de commencer le travail",
+  "categorie": "TRAVAIL",
+  "statut": "APPROUVEE",
+  "votesRecus": 42,
+  "dateSoumission": "2025-06-10T15:30:00"
+}
+
+
+### ExcuseCreative -  Modification - erreur 404 (excuse non trouvée
+PUT http://localhost:9000/api/excuse-creative/9999
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+{
+  "texteExcuse": "Excuse modifiée",
+  "categorie": "ETUDES",
+  "statut": "APPROUVEE",
+  "votesRecus": 0,
+  "dateSoumission": "2025-06-10T15:30:00"
+}
+
+### ExcuseCreative -  Voter une excuse (par PROCRASTINATEUR_EN_HERBE)
+POST http://localhost:9000/api/excuse-creative/1/voter?newVote=10
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### ExcuseCreative - Voter - erreur 404 (excuse non trouvée)
+POST http://localhost:9000/api/excuse-creative/9999/voter?newVote=77
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+
+### ExcuseCreative - Modération - Cas d’erreur — utilisateur non autorisé
+POST http://localhost:9000/api/excuse-creative/1/moderation
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+
+### ExcuseCreative - Suppression erreur 401 (non autorisé)
+DELETE http://localhost:9000/api/excuse-creative/1
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+
+### ExcuseCreative - Suppression (par GESTIONNAIRE_TEMPS_PERDU)
+DELETE http://localhost:9000/api/excuse-creative/1
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+### TacheAEviter - Création 1 (par PROCRASTINATEUR_EN_HERBE)
+POST http://localhost:9000/api/tache-a-eviter
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{
+  "description": "Regarder des vidéos inutiles",
+  "degreUrgence": 2,
+  "dateLimite": "2025-07-01T00:00:00",
+  "consequencesPotentielles": "Perte de temps",
+  "statut": "EN_ATTENTE",
+  "dateCreation": "2025-06-11T09:00:00"
+}
+
+### TacheAEviter - Création 2 (par PROCRASTINATEUR_EN_HERBE)
+POST http://localhost:9000/api/tache-a-eviter
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{
+  "description": "Regarder des séries",
+  "degreUrgence": 4,
+  "dateLimite": "2025-07-01T00:00:00",
+  "consequencesPotentielles": "La procrastination is here to stay",
+  "statut": "EN_ATTENTE",
+  "dateCreation": "2025-06-01T09:00:00"
+}
+
+### TacheAEviter - creation - erreur 400 (date limite invalide)
+POST http://localhost:9000/api/tache-a-eviter
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{
+  "description": "Tâche invalide",
+  "degreUrgence": 5,
+  "dateLimite": "2012-12-12T00:00:00",
+  "consequencesPotentielles": "FIN DU MONDE",
+  "statut": "EN_ATTENTE",
+  "dateCreation": "2025-06-05T09:00:00"
+}
+
+### TacheAEviter - Get all
+GET http://localhost:9000/api/tache-a-eviter
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### TacheAEviter - Get by id
+GET http://localhost:9000/api/tache-a-eviter/1
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### TacheAEviter - Modification (par ANTI_PROCRASTINATEUR_REPENTI)
+PUT http://localhost:9000/api/tache-a-eviter/1
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+{
+  "id": 1,
+  "description": "Avancer dans le projet",
+  "degreUrgence": 3,
+  "dateLimite": "2025-07-10T00:00:00",
+  "consequencesPotentielles": "Gerer le stress",
+  "statut": "CATASTROPHE",
+  "dateCreation": "2025-06-01T08:00:00"
+}
+
+### TacheAEviter - Modification erreur 404 (tâche non trouvée)
+PUT http://localhost:9000/api/tache-a-eviter/999
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+{
+  "description": "Changer description",
+  "degreUrgence": 1,
+  "dateLimite": "2025-07-01T00:00:00",
+  "consequencesPotentielles": "Perte de temps",
+  "statut": "EVITEE_AVEC_SUCCES",
+  "dateCreation": "2025-06-01T08:00:00"
+}
+
+### TacheAEviter - Modification
+PUT http://localhost:9000/api/tache-a-eviter/1
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+{
+  "description": "Changer description",
+  "degreUrgence": 3,
+  "dateLimite": "2025-07-01T00:00:00",
+  "consequencesPotentielles": "Perte de temps",
+  "statut": "EVITEE_AVEC_SUCCES",
+  "dateCreation": "2025-06-01T08:00:00"
+}
+
+### TacheAEviter -  Recuperer les points d’une tâche
+GET http://localhost:9000/api/tache-a-eviter/1/points
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### TacheAEviter -  Recuperer le nb total des points de l’utilisateur
+GET http://localhost:9000/api/tache-a-eviter/points/total
+Content-Type: application/json
+X-User-Email:  newbie@example.com
+
+### TacheAEviter -  Suppression erreur 403 (utilisateur non autorisé)
+DELETE http://localhost:9000/api/tache-a-eviter/1
+Content-Type: application/json
+X-User-Email:  newbie@example.com
+
+### TacheAEviter -  Suppression (par GESTIONNAIRE_TEMPS_PERDU)
+DELETE http://localhost:9000/api/tache-a-eviter/1
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+### ExcuseCreative - Apres ajout de taches à eviter -  Modération succès (par GESTIONNAIRE_TEMPS_PERDU)
+POST http://localhost:9000/api/excuse-creative/3/moderation
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
