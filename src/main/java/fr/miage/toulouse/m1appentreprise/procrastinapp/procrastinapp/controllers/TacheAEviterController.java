@@ -37,12 +37,12 @@ public class TacheAEviterController {
     }
 
     /** Récupérer toutes les tâches à éviter pour l'utilisateur connecté.
-     * L'utilisateur doit avoir le rôle PROCRASTINATEUR_EN_HERBE, ANTI_PROCRASTINATEUR_REPENTI ou GESTIONNAIRE_TEMPS_PERDU.
+     * L'utilisateur doit avoir le rôle PROCRASTINATEUR_EN_HERBE, ANTI_PROCRASTINATEUR_REPENTIS ou GESTIONNAIRE_TEMPS_PERDU.
      * @param utilisateur l'utilisateur connecté
      * @return la liste des tâches à éviter de l'utilisateur
      */
     @GetMapping("")
-    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTI, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
+    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
     public ResponseEntity<List<TacheAEviter>> getTachesForUser(@CurrentUser Utilisateur utilisateur) {
         return ResponseEntity.ok(tacheAEviterService.findAllByUtilisateur(utilisateur));
     }
@@ -64,13 +64,13 @@ public class TacheAEviterController {
 
     /**
      * Modifier une tâche existante.
-     * L'utilisateur doit avoir le rôle ANTI_PROCRASTINATEUR_REPENTI ou GESTIONNAIRE_TEMPS_PERDU.
+     * L'utilisateur doit avoir le rôle ANTI_PROCRASTINATEUR_REPENTIS ou GESTIONNAIRE_TEMPS_PERDU.
      * @param id id de la tâche à modifier
      * @param tache nouvelles données
      * @return tâche mise à jour
      */
     @PutMapping("/{id}")
-    @AllowedRoles({RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTI, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
+    @AllowedRoles({RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
     public ResponseEntity<TacheAEviter> modifierTacheAEviter(@PathVariable Long id, @RequestBody TacheAEviter tache) {
         return ResponseEntity.ok(tacheAEviterService.modifierTacheAEviter(id, tache));
     }
@@ -90,7 +90,7 @@ public class TacheAEviterController {
 
     // Calculer les points d'une tâche individuelle
     @GetMapping("/{id}/points")
-    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTI, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
+    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
     public ResponseEntity<?> getPointsPourTache(@PathVariable Long id) {
         TacheAEviter tache = tacheAEviterService.getTacheById(id);
         int points = tacheAEviterService.calculerPoints(tache);
@@ -99,7 +99,7 @@ public class TacheAEviterController {
 
     // Calculer le total des points de l'utilisateur courant
     @GetMapping("/points/total")
-    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTI, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
+    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
     public ResponseEntity<?> getTotalPointsUtilisateur(@CurrentUser Utilisateur utilisateur) {
         int totalPoints = tacheAEviterService.calculerTotalPoints(utilisateur);
         return ResponseEntity.ok(totalPoints);

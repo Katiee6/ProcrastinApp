@@ -21,24 +21,24 @@ public class ConfrontationPiegeController {
 
     /**
      * Récupérer toutes les confrontations aux pièges.
-     * L'utilisateur doit avoir le rôle ANTI_PROCRASTINATEUR_REPENTI.
+     * L'utilisateur doit avoir le rôle ANTI_PROCRASTINATEUR_REPENTIS.
      * @return liste des confrontations enregistrées
      */
     @GetMapping
-    @AllowedRoles(RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTI)
+    @AllowedRoles(RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS)
     public Iterable<ConfrontationPiege> getConfrontationPieges() {
         return confrontationPiegeService.getAllConfrontationPieges();
     }
 
     /**
      * Récupérer une confrontation par son identifiant.
-     * L'utilisateur doit avoir le rôle ANTI_PROCRASTINATEUR_REPENTI ou être lié à cette confrontation.
+     * L'utilisateur doit avoir le rôle ANTI_PROCRASTINATEUR_REPENTIS ou être lié à cette confrontation.
      * @param id identifiant de la confrontation
      * @param utilisateur utilisateur connecté
      * @return la confrontation correspondante
      */
     @GetMapping("/{idConfrontationPiege}")
-    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTI})
+    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS})
     public ConfrontationPiege getConfrontationPiegeById(@PathVariable("idConfrontationPiege") long id,
                                                         @CurrentUser Utilisateur utilisateur) {
         return confrontationPiegeService.getConfrontationPiegeById(id, utilisateur);
@@ -46,12 +46,12 @@ public class ConfrontationPiegeController {
 
     /**
      * Récupérer toutes les confrontations associées à un piège donné.
-     * L'utilisateur doit avoir le rôle ANTI_PROCRASTINATEUR_REPENTI.
+     * L'utilisateur doit avoir le rôle ANTI_PROCRASTINATEUR_REPENTIS.
      * @param id identifiant du piège
      * @return liste des confrontations au piège spécifié
      */
     @GetMapping("piege/{piegeId}")
-    @AllowedRoles(RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTI)
+    @AllowedRoles(RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS)
     public Iterable<ConfrontationPiege> getConfrontationsPiegesPiege(@PathVariable("piegeId") long id) {
         return confrontationPiegeService.getAllConfrontationsAuPiege(id);
     }

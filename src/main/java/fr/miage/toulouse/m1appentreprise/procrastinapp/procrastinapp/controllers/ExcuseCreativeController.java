@@ -28,23 +28,23 @@ public class ExcuseCreativeController {
 
     /**
      * Récupérer toutes les excuses créatives.
-     * L'utilisateur doit avoir le rôle PROCRASTINATEUR_EN_HERBE, ANTI_PROCRASTINATEUR_REPENTI ou GESTIONNAIRE_TEMPS_PERDU.
+     * L'utilisateur doit avoir le rôle PROCRASTINATEUR_EN_HERBE, ANTI_PROCRASTINATEUR_REPENTIS ou GESTIONNAIRE_TEMPS_PERDU.
      * @return la liste de toutes les excuses créatives
      */
     @GetMapping("")
-    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTI, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
+    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
     public ResponseEntity<Iterable<ExcuseCreative>> getAllExcuses() {
         return ResponseEntity.ok(excuseCreativeService.getAllExcusesCreatives());
     }
 
     /**
      * Récupérer une excuse créative par son id.
-     * L'utilisateur doit avoir le rôle PROCRASTINATEUR_EN_HERBE, ANTI_PROCRASTINATEUR_REPENTI ou GESTIONNAIRE_TEMPS_PERDU.
+     * L'utilisateur doit avoir le rôle PROCRASTINATEUR_EN_HERBE, ANTI_PROCRASTINATEUR_REPENTIS ou GESTIONNAIRE_TEMPS_PERDU.
      * @param id identifiant de l'excuse
      * @return l'excuse trouvée
      */
     @GetMapping("/{id}")
-    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTI, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
+    @AllowedRoles({RoleUtilisateur.PROCRASTINATEUR_EN_HERBE, RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
     public ResponseEntity<ExcuseCreative> getExcuseById(@PathVariable Long id) {
         return ResponseEntity.ok(excuseCreativeService.getExcuseCreativeById(id));
     }
@@ -104,13 +104,13 @@ public class ExcuseCreativeController {
 
     /**
      * Modifier une excuse créative.
-     * L'utilisateur doit avoir le rôle ANTI_PROCRASTINATEUR_REPENTI ou GESTIONNAIRE_TEMPS_PERDU.
+     * L'utilisateur doit avoir le rôle ANTI_PROCRASTINATEUR_REPENTIS ou GESTIONNAIRE_TEMPS_PERDU.
      * @param id identifiant de l'excuse à modifier
      * @param excuseCreative les nouvelles données de l'excuse
      * @return l'excuse modifiée
      */
     @PutMapping("/{id}")
-    @AllowedRoles({RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTI, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
+    @AllowedRoles({RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
     public ResponseEntity<ExcuseCreative> modifierExcuseCreative(@PathVariable Long id,
                                                        @RequestBody ExcuseCreative excuseCreative) {
         ExcuseCreative updated = excuseCreativeService.modifierExcuseCreative(id, excuseCreative);

@@ -113,7 +113,7 @@ public class UtilisateurService {
             throw new ForbiddenOperationException("Vous ne pouvez modifier que votre propre compte.");
         }
 
-        // Règle 2 : ANTI_PROCRASTINATEUR_REPENTI ne peut pas modifier un GESTIONNAIRE_TEMPS_PERDU
+        // Règle 2 : ANTI_PROCRASTINATEUR_REPENTIS ne peut pas modifier un GESTIONNAIRE_TEMPS_PERDU
         if (utilisateurConnecte.getRole().equals(RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS)
                 && utilisateurCible.getRole().equals(RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU)) {
             throw new ForbiddenOperationException("Vous ne pouvez pas modifier un administrateur.");
