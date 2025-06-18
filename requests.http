@@ -121,6 +121,20 @@ X-User-Email: gestionnaire@example.com
 { "titre": "Defi impossible", "description": "Ne fais rien pendant 3 jours", "duree": 3, "difficulte": "DIFFICILE",
   "pointsAGagner": 70, "dateDebut": "2025-01-01", "dateFin": "2025-07-01" }
 
+### DefiProcrastination - Get all
+GET http://localhost:9000/api/defis
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### DefiProcrastination - Get all actifs
+GET http://localhost:9000/api/defis/actifs
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### DefiProcrastination - Get by id
+GET http://localhost:9000/api/defis/1
+Content-Type: application/json
+X-User-Email: newbie@example.com
 
 ### DefiProcrastination - Modification (par GESTIONNAIRE_TEMPS_PERDU)
 PUT http://localhost:9000/api/defis/1
@@ -156,39 +170,6 @@ X-User-Email: newbie@example.com
 
 { "defi": {"id": 1} }
 
-
-### ParticipationDefi - Démarrage si date atteinte (par GESTIONNAIRE_TEMPS_PERDU)
-PUT http://localhost:9000/api/participations-defis/commencer
-Content-Type: application/json
-X-User-Email: gestionnaire@example.com
-
-
-### ParticipationDefi - Fin (par PROCRASTINATEUR_EN_HERBE)
-PUT http://localhost:9000/api/participations-defis
-Content-Type: application/json
-X-User-Email: newbie@example.com
-
-{ "id": 1, "pointsGagnes": 40 }
-
-
-
-
-### DefiProcrastination - Get all
-GET http://localhost:9000/api/defis
-Content-Type: application/json
-X-User-Email: newbie@example.com
-
-### DefiProcrastination - Get all actifs
-GET http://localhost:9000/api/defis/actifs
-Content-Type: application/json
-X-User-Email: newbie@example.com
-
-### DefiProcrastination - Get by id
-GET http://localhost:9000/api/defis/1
-Content-Type: application/json
-X-User-Email: newbie@example.com
-
-
 ### ParticipationDefi - Get all
 GET http://localhost:9000/api/participations-defis
 Content-Type: application/json
@@ -208,6 +189,22 @@ X-User-Email: gestionnaire@example.com
 GET http://localhost:9000/api/participations-defis/1
 Content-Type: application/json
 X-User-Email: newbie@example.com
+
+### ParticipationDefi - Fin (par PROCRASTINATEUR_EN_HERBE)
+PUT http://localhost:9000/api/participations-defis
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{ "id": 1, "pointsGagnes": 40 }
+
+### ParticipationDefi - Démarrage si date atteinte (par GESTIONNAIRE_TEMPS_PERDU)
+PUT http://localhost:9000/api/participations-defis/commencer
+Content-Type: application/json
+X-User-Email: gestionnaire@example.com
+
+#
+# ExcuseCreative
+#
 
 ### ExcuseCreative - Création (par PROCRASTINATEUR_EN_HERBE)
 POST http://localhost:9000/api/excuse-creative
@@ -256,8 +253,6 @@ X-User-Email: newbie@example.com
 GET http://localhost:9000/api/excuse-creative/1
 Content-Type: application/json
 X-User-Email: newbie@example.com
-
-
 
 ### ExcuseCreative - Modification (par PROCRASTINATEUR_REPENTI)
 PUT http://localhost:9000/api/excuse-creative/1
@@ -315,6 +310,10 @@ X-User-Email: newbie@example.com
 DELETE http://localhost:9000/api/excuse-creative/1
 Content-Type: application/json
 X-User-Email: gestionnaire@example.com
+
+#
+# TacheAEviter
+#
 
 ### TacheAEviter - Création 1 (par PROCRASTINATEUR_EN_HERBE)
 POST http://localhost:9000/api/tache-a-eviter
@@ -435,3 +434,50 @@ X-User-Email: gestionnaire@example.com
 POST http://localhost:9000/api/excuse-creative/3/moderation
 Content-Type: application/json
 X-User-Email: gestionnaire@example.com
+
+#
+# ConfrontationPiege
+#
+
+### ConfrontationPiege - Création SUCCES (par PROCRASTINATEUR_EN_HERBE)
+POST http://localhost:9000/api/confrontation-pieges
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{ "piege": { "id": 1 }, "dateConfrontation": "2025-06-16", "succes": true, "commentaire": "c'est bien" }
+
+### ConfrontationPiege - Création ECHEC (par PROCRASTINATEUR_EN_HERBE)
+POST http://localhost:9000/api/confrontation-pieges
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+{ "piege": { "id": 1 }, "dateConfrontation": "2025-06-16", "succes": false, "commentaire": "c'est bien" }
+
+### ConfrontationPiege - Get all (par ANTI_PROCRASTINATEUR_REPENTI)
+GET http://localhost:9000/api/confrontation-pieges
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+### ConfrontationPiege - Get by id (par PROCRASTINATEUR_EN_HERBE)
+GET http://localhost:9000/api/confrontation-pieges/1
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### ConfrontationPiege - Get by piege id (par ANTI_PROCRASTINATEUR_REPENTI)
+GET http://localhost:9000/api/confrontation-pieges/piege/1
+Content-Type: application/json
+X-User-Email: thebest@example.com
+
+### ConfrontationPiege - Get all for connected user (par PROCRASTINATEUR_EN_HERBE)
+GET http://localhost:9000/api/confrontation-pieges/user
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+### ConfrontationPiege - Suppression (par PROCRASTINATEUR_EN_HERBE)
+DELETE http://localhost:9000/api/confrontation-pieges/1
+Content-Type: application/json
+X-User-Email: newbie@example.com
+
+#
+# Autre
+#

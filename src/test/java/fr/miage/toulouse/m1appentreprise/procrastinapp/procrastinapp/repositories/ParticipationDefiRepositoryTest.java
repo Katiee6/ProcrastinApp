@@ -80,7 +80,7 @@ class ParticipationDefiRepositoryTest {
         participation.setDefi(defi);
         participationDefiRepository.save(participation);
         // Après la création : on trouve cette participation
-        List<ParticipationDefi> participationsApres = participationDefiRepository.findParticipationDefiByDefi_Id(1L);
+        List<ParticipationDefi> participationsApres = participationDefiRepository.findParticipationDefiByDefi_Id(defi.getId());
         assertTrue(participationsApres.contains(participation), "La participation devrait être trouvée");
         // On ne trouve pas une autre participation
         List<ParticipationDefi> participationsAutre = participationDefiRepository.findParticipationDefiByDefi_Id(2L);
@@ -121,7 +121,7 @@ class ParticipationDefiRepositoryTest {
         participation.setStatut(StatutParticipationDefi.INSCRIT);
         participationDefiRepository.save(participation);
         // Après la création : on trouve cette participation
-        boolean existeApres = participationDefiRepository.existsParticipationDefiByDefi_IdAndStatutNot(1L, StatutParticipationDefi.EN_COURS);
+        boolean existeApres = participationDefiRepository.existsParticipationDefiByDefi_IdAndStatutNot(defi.getId(), StatutParticipationDefi.EN_COURS);
         assertTrue(existeApres, "La participation devrait être trouvée");
         // On ne trouve pas une autre participation
         boolean existeAutre = participationDefiRepository.existsParticipationDefiByDefi_IdAndStatutNot(2L, StatutParticipationDefi.EN_COURS);

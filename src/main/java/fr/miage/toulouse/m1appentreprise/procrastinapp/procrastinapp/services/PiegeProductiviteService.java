@@ -74,14 +74,22 @@ public class PiegeProductiviteService {
      * @throws ConflictException si un autre piège identique existe déjà
      */
     public PiegeProductivite modifierPiegeProductivite(Long id, PiegeProductivite piegeModifie) {
-        getPiegeProductiviteById(id); // vérifie qu’il existe
-        piegeModifie.setId(id); // s’assurer que l’ID est bien défini
+        PiegeProductivite original = getPiegeProductiviteById(id); // on récupère l'objet existant
 
         if (existeDejaPourModification(piegeModifie)) {
             throw new ConflictException("Un autre piège identique existe déjà !");
         }
 
-        return piegeProductiviteRepository.save(piegeModifie);
+        // Met à jour seulement les champs modifiables
+        original.setTitre(piegeModifie.getTitre());
+        original.setDescription(piegeModifie.getDescription());
+        original.setType(piegeModifie.getType());
+        original.setNiveauDifficulte(piegeModifie.getNiveauDifficulte());
+        original.setRecompenseResistance(piegeModifie.getRecompenseResistance());
+        original.setConsequenceEchec(piegeModifie.getConsequenceEchec());
+
+        // On ne touche pas à la date de création ni au créateur
+        return piegeProductiviteRepository.save(original);
     }
 
     /**
