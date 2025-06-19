@@ -16,6 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * Test unitaire pour le service de gestion des confrontations aux pièges.
+ */
 class ConfrontationPiegeServiceTest {
 
     private ConfrontationPiegeRepository confrontationPiegeRepository;

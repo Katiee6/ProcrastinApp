@@ -23,6 +23,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+/**
+ * Test unitaire pour le service ParticipationDefiService.
+ */
 class ParticipationDefiServiceTest {
 
     private ParticipationDefiRepository participationDefiRepository;
