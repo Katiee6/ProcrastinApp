@@ -573,7 +573,7 @@ X-User-Email: gestionnaire@example.com
 ### AttributionRecompense -  Créer une attribution
 POST http://localhost:9000/api/attributions-recompenses
 Content-Type: application/json
-X-User-Email: coach@example.com
+X-User-Email: thebest@example.com
 
 {
   "recompenseId": 1,
@@ -594,7 +594,7 @@ X-User-Email: gestionnaire@example.com
 ### AttributionRecompense - Attributions de l'utilisateur connecté
 GET http://localhost:9000/api/attributions-recompenses/user
 Content-Type: application/json
-X-User-Email: user@example.com
+X-User-Email: newbie@example.com
 
 ### AttributionRecompense -  Attributions d’un utilisateur spécifique (par son ID)
 GET http://localhost:9000/api/attributions-recompenses/user/2
@@ -604,9 +604,9 @@ X-User-Email: gestionnaire@example.com
 ### AttributionRecompense - Supprimer une attribution par ID
 DELETE http://localhost:9000/api/attributions-recompenses/1
 Content-Type: application/json
-X-User-Email: coach@example.com
+X-User-Email: gestionnaire@example.com
 
 ### AttributionRecompense -  Désactiver une attribution manuellement
 PATCH http://localhost:9000/api/attributions-recompenses/2/desactiver
 Content-Type: application/json
-X-User-Email: coach@example.com
+X-User-Email: gestionnaire@example.com
