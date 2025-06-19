@@ -49,7 +49,7 @@ public class AttributionRecompenseService {
     /**
      * Récupère toutes les attributions d’un utilisateur donné.
      */
-    public List<AttributionRecompense> getAttributionsByUtilisateur(Long utilisateurId) {
+    public Iterable<AttributionRecompense> getAttributionsByUtilisateur(Long utilisateurId) {
         Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur " + utilisateurId + " non trouvé"));
         return attributionRecompenseRepository.findAttributionRecompensesByUtilisateur(utilisateur);

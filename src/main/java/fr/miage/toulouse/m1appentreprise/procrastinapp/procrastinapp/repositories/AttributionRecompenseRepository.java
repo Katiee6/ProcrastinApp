@@ -9,7 +9,6 @@ import java.util.List;
 public interface AttributionRecompenseRepository extends CrudRepository<AttributionRecompense, Long> {
     boolean existsByUtilisateur(Utilisateur utilisateur);
 
-     List<AttributionRecompense> findAttributionRecompensesByUtilisateur(Utilisateur utilisateur);
-
-    List<AttributionRecompense> findAttributionRecompenseByContexteAttribution(String contexteAttribution);
+    Iterable<AttributionRecompense> findAttributionRecompensesByUtilisateur(Utilisateur utilisateur);
+    Iterable<AttributionRecompense> findAttributionRecompenseByContexteAttribution(String contexteAttribution);
 }

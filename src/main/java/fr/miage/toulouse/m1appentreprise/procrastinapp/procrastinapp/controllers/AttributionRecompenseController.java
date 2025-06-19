@@ -45,7 +45,7 @@ public class AttributionRecompenseController {
      */
     @GetMapping("/user")
     @AllowedRoles(RoleUtilisateur.PROCRASTINATEUR_EN_HERBE)
-    public List<AttributionRecompense> getAttributionsUtilisateur(@CurrentUser Utilisateur utilisateur) {
+    public Iterable<AttributionRecompense> getAttributionsUtilisateur(@CurrentUser Utilisateur utilisateur) {
         return attributionRecompenseService.getAttributionsByUtilisateur(utilisateur.getId());
     }
 
@@ -54,7 +54,7 @@ public class AttributionRecompenseController {
      */
     @GetMapping("/user/{id}")
     @AllowedRoles({RoleUtilisateur.ANTI_PROCRASTINATEUR_REPENTIS, RoleUtilisateur.GESTIONNAIRE_TEMPS_PERDU})
-    public List<AttributionRecompense> getAttributionsByUtilisateur(@PathVariable("id") Long id) {
+    public Iterable<AttributionRecompense> getAttributionsByUtilisateur(@PathVariable("id") Long id) {
         return attributionRecompenseService.getAttributionsByUtilisateur(id);
     }
 
