@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/procrastinApp?serverTimezone=UTC
     username: root
-    password: "pass_procrastinApp1234567*$"
+    password: MDP
   jpa:
     show-sql: true
     hibernate:
