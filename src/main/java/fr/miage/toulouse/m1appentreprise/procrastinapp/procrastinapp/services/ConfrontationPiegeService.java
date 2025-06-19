@@ -158,12 +158,12 @@ public class ConfrontationPiegeService {
             // on ajoute les points enlevés précédemment
             pointsAAjouter = 50;
             // on retire le badge précédemment attribué
-            List<AttributionRecompense> attributionRecompense = attributionRecompenseRepository
+            Iterable<AttributionRecompense> attributionRecompense = attributionRecompenseRepository
                     .findAttributionRecompenseByContexteAttribution("Echec confrontation piège " + piegeId);
-            if (attributionRecompense.isEmpty()) {
+            if (attributionRecompense.spliterator().getExactSizeIfKnown() == 0) {
                 throw new ResourceNotFoundException("L'attribution de récompense n'a pas été trouvée");
             }
-            AttributionRecompense attribution = attributionRecompense.get(0);
+            AttributionRecompense attribution = attributionRecompense.iterator().next();
             attributionRecompenseRepository.delete(attribution);
         }
         int pointsAvant = utilisateur.getPointAccumules();
